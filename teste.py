@@ -3,7 +3,7 @@ import pandas as pd
 
 pd.options.display.float_format = '{:.1f}'.format
 
-df = pd.read_excel('cupons_janeiro_filial.xlsx', index_col=None, usecols=['CUPNUM', 'CODPRD', 'CODBAR','Produto', 
+df = pd.read_excel('data/cupons_janeiro_filial.xlsx', index_col=None, usecols=['CUPNUM', 'CODPRD', 'CODBAR','Produto', 
                                                                           'Qnt Venda', 'Total'])
 produto_lista = df['Produto'].sort_values().unique()
 
