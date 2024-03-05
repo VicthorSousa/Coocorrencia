@@ -1,12 +1,9 @@
 import streamlit as st
 import pandas as pd
-import pip
-from openpyxl import Workbook
 
 pd.options.display.float_format = '{:.1f}'.format
 
-df = pd.read_excel('cupons_janeiro_filial.xlsx', index_col=None, usecols=['CUPNUM', 'CODPRD', 'CODBAR','Produto', 
-                                                                          'Qnt Venda', 'Total'])
+df = pd.read_csv('cupons_janeiro_filial.csv', on_bad_lines='skip', sep=';')
 produto_lista = df['Produto'].sort_values().unique()
 
 st.title('Análise de Produtos - Coocorrência')
