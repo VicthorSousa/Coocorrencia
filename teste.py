@@ -25,4 +25,4 @@ new_df2['Percentual'] = (new_df2['CUPNUM'] / new_df2['Total'] * 100).round(2).as
 new_df2.drop(['Qnt Venda', 'Total', 'CODPRD', 'CODBAR'], axis=1, inplace=True)
 
 st.text(f'Nessa painel estão sendo analisados um total de {quantidade} cupons')
-st.dataframe(new_df2, use_container_width=True)
+st.dataframe(new_df2, use_container_width=False)
