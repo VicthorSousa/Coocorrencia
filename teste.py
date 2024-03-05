@@ -7,7 +7,7 @@ df = pd.read_csv('cupons_janeiro_filial.csv', on_bad_lines='skip', sep=';')
 produto_lista = df['Produto'].sort_values().unique()
 
 st.title('Análise de Produtos - Coocorrência')
-option = st.selectbox('Selecione o produto', produto_lista, index=None, placeholder='Selecione o produto')
+option = st.selectbox('Selecione o produto', produto_lista, placeholder='Selecione o produto...')
 #nome_produto = st.markdown(sorted(option))
 
 
