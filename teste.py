@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-pd.options.display.float_format = '{:.1f}'.format
+pd.options.display.float_format = '{:.0f}'.format
 
 df = pd.read_csv('cupons_janeiro_filial.csv', on_bad_lines='skip', sep=';')
 produto_lista = df['Produto'].sort_values().unique()
