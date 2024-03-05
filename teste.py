@@ -4,7 +4,7 @@ import pandas as pd
 pd.options.display.float_format = '{:.0f}'.format
 
 df = pd.read_csv('cupons_janeiro_filial.csv', on_bad_lines='skip', sep=';')
-produto_lista = df['Produto'].sort_values(ignore_index=False).unique()
+produto_lista = df['Produto'].sort_values(ignore_index=True).unique()
 
 st.title('Análise de Produtos - Coocorrência')
 option = st.selectbox(label='Selecione o produto', options=produto_lista, index=None,placeholder='Selecione o produto...')
