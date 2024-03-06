@@ -3,6 +3,8 @@ import pandas as pd
 
 pd.options.display.float_format = '{:.0f}'.format
 
+st.set_page_config(page_title='Análise de Coocorrência', page_icon=':bar_chart:')
+
 df = pd.read_csv('cupons_janeiro_matriz.csv', on_bad_lines='skip', sep=';')
 produto_lista = df['Produto'].sort_values().unique()
 
