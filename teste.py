@@ -29,7 +29,7 @@ new_df2['Total'] = new_df['NUMCUP'].nunique()
 new_df2['Percentual'] = (new_df2['NUMCUP'] / new_df2['Total'] * 100).round(2).astype(str) + '%'
 new_df2.drop(['NUMCUP', 'QTDPRD', 'Total'], axis=1, inplace=True)
 
-st.text(f'Analise de {quantidade} cupons emitidos do produto selecionado.')
-st.text(f'Analise de {qnt_total} cupons emitidos no período.')
+st.text(f'Analise de {quantidade} cupons emitidos do produto selecionado')
+st.text(f'de um total de {qnt_total} cupons.')
 st.text('Dados referentes a venda de 1B2024')
 st.dataframe(new_df2, use_container_width=True)
