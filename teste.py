@@ -5,8 +5,11 @@ pd.options.display.float_format = '{:.0f}'.format
 
 st.set_page_config(page_title='Análise de Coocorrência', page_icon=':bar_chart:')
 
-df = pd.read_csv('cupons_janeiro_matriz.csv', on_bad_lines='skip', sep=';')
-produto_lista = df['Produto'].sort_values().unique()
+df1 = pd.read_csv('cupons_janeiro_matriz.csv', on_bad_lines='skip', sep=';')
+df2 = pd.read_csv('cupons_fevereiro_matriz.csv', on_bad_lines='skip', sep=';')
+df = pd.concat([df1, df2])
+
+produto_lista = df['DESCRI'].sort_values().unique()
 
 st.title(':bar_chart: Análise de Produtos - Coocorrência - Loja Avenida')
 option = st.selectbox(label='Selecione o produto', options=produto_lista, placeholder='Selecione o produto...')
@@ -14,18 +17,18 @@ option = st.selectbox(label='Selecione o produto', options=produto_lista, placeh
 
 
 
-qnt_total = df['CUPNUM'].nunique()                      
-df1 = df.loc[(df['Produto']==option), ['CUPNUM','CODPRD', 'Produto', 'Qnt Venda', 'Total']]
-cupons_lista = df1['CUPNUM'].tolist()
-new_df = df.loc[df['CUPNUM'].isin(cupons_lista)]
-quantidade = new_df['CUPNUM'].nunique()
-new_df1 = new_df.groupby('Produto').nunique().sort_values('Qnt Venda')
-new_df1.rename(columns={'CUPNUM': 'Qnt Cupons'})
-new_df2 = new_df1.sort_values(('CUPNUM'), ascending=False).head(500)
-new_df2['Total'] = new_df['CUPNUM'].nunique()
-new_df2['Percentual'] = (new_df2['CUPNUM'] / new_df2['Total'] * 100).round(2).astype(str) + '%'
-new_df2.drop(['Qnt Venda', 'Total', 'CODPRD', 'CUPNUM'], axis=1, inplace=True)
+qnt_total = df['NUMCUP'].nunique()                      
+df3 = df.loc[(df['DESCRI']==option), ['NUMCUP','DESCRI', 'QTDPRD']]
+cupons_lista = df3['NUMCUP'].tolist()
+new_df = df.loc[df['NUMCUP'].isin(cupons_lista)]
+quantidade = new_df['NUMCUP'].nunique()
+new_df1 = new_df.groupby('DESCRI').nunique().sort_values('QTDPRD')
+new_df1.rename(columns={'NUMCUP': 'Qnt Cupons'})
+new_df2 = new_df1.sort_values(('NUMCUP'), ascending=False).head(500)
+new_df2['Total'] = new_df['NUMCUP'].nunique()
+new_df2['Percentual'] = (new_df2['NUMCUP'] / new_df2['Total'] * 100).round(2).astype(str) + '%'
+new_df2.drop(['NUMCUP', 'QTDPRD', 'Total'], axis=1, inplace=True)
 
 st.text(f'Analise de {quantidade} cupons emitidos do produto selecionado.')
-st.text('Dados referentes a venda de Janeiro/2024')
+st.text('Dados referentes a venda de 1B2024')
 st.dataframe(new_df2, use_container_width=True)
